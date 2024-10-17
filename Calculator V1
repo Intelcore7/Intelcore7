@@ -1,0 +1,114 @@
+from tkinter import *
+
+root = Tk()
+ent = Entry(root, width = 30)
+ent.grid(row = 1, column = 2)
+lst = []
+calc = []
+
+def Inserting(num):
+    ent.insert("end", num)
+    lst.append(str(num))
+
+def AC():
+    ent.delete(0, "end")
+    calc.clear()
+    lst.clear()
+
+def CalcAdd():                              # ziffer werden in eine Zahl gefasst
+    a = ""
+    for i in lst:
+        a += i
+    calc.append(int(a))
+    lst.clear()
+
+def Getplus():
+    CalcAdd()
+    ent.insert("end", "+")
+    calc.append("+")
+
+def GetSub():
+    CalcAdd()
+    ent.insert("end", "-")
+    calc.append("-")
+
+def GetMul():
+    CalcAdd()
+    ent.insert("end", "*")
+    calc.append("*")
+
+def GetDiv():
+    CalcAdd()
+    ent.insert("end", "/")
+    calc.append("/")
+
+
+def Calculator(lst, a, i):
+    if i == 0:
+        global result
+        result = lst[0]
+
+    if lst[i+1] == "+":
+        print("1.True")
+        print("= ", result)
+        print(a)
+        result += a
+    if lst[i+1] == "-":
+        result -= a
+    if lst[i+1] == "*":
+        result = result * a
+    if lst[i + 1] == "/":
+        result = result / a
+    if i + 2 == len(lst) -1:
+        print("3. True", result)
+
+def GetResult():
+    CalcAdd()
+    print(calc)
+    ent.delete(0, "end")
+    for i in range(len(calc)):
+        if i + 2 <= len(calc) - 1:
+            pass
+            if type(calc[i]) == int:
+                print("2.True")
+                Calculator(calc, calc[i+2], i)
+        else:
+            break
+
+    calc.clear()
+    ent.insert("end", " [Please press AC now]")
+
+#--------------------------------------------------------------------------------------------------
+but1 = Button(root, text = "1", padx = 20, pady = 20, command = lambda: Inserting(1))
+but2 = Button(root, text = "2", padx = 20, pady = 20, command = lambda: Inserting(2))
+but3 = Button(root, text = "3", padx = 20, pady = 20, command = lambda: Inserting(3))
+but4 = Button(root, text = "4", padx = 20, pady = 20, command = lambda: Inserting(4))
+but5 = Button(root, text = "5", padx = 20, pady = 20, command = lambda: Inserting(5))
+but6 = Button(root, text = "6", padx = 20, pady = 20, command = lambda: Inserting(6))
+but7 = Button(root, text = "7", padx = 20, pady = 20, command = lambda: Inserting(7))
+but8 = Button(root, text = "8", padx = 20, pady = 20, command = lambda: Inserting(8))
+but9 = Button(root, text = "9", padx = 20, pady = 20, command = lambda: Inserting(9))
+BUTPL = Button(root, text = "+", padx = 20, pady = 20, command = Getplus)
+BUTSUB = Button(root, text = "-", padx = 20, pady = 20, command = GetSub)
+BUTMUL = Button(root, text = "*", padx = 20, pady = 20, command = GetMul)
+BUTDIV = Button(root, text = "/", padx = 20, pady = 20, command = GetDiv)
+BUTRE = Button(root, text = "=", padx = 20, pady = 20, command = GetResult)
+BUTAC = Button(root, text = "AC", padx = 20, pady = 20, command = AC)
+
+#--------------------------------------------------------------------------------------------------
+but1.grid(row = 2,column = 1)
+but2.grid(row = 2,column = 2)
+but3.grid(row = 2,column = 3)
+but4.grid(row = 3,column = 1)
+but5.grid(row = 3,column = 2)
+but6.grid(row = 3,column = 3)
+but7.grid(row = 4,column = 1)
+but8.grid(row = 4,column = 2)
+but9.grid(row = 4,column = 3)
+BUTPL.grid(row = 5, column = 2)
+BUTSUB.grid(row = 6, column = 2)
+BUTRE.grid(row = 5, column = 3)
+BUTAC.grid(row = 5, column = 1)
+BUTMUL.grid(row = 6, column = 3)
+BUTDIV.grid(row = 6, column = 1)
+root.mainloop()
