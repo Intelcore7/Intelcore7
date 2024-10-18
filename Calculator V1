@@ -42,6 +42,21 @@ def GetDiv():
     ent.insert("end", "/")
     calc.append("/")
 
+def PvS(lst):
+    lst1 = lst.copy()
+    for i in range(len(lst1)):
+        if lst1[i] == "*":
+            a = lst1[i-1] * lst1[i+1]
+            lst[i] = a
+            lst[i-1], lst[i+1] = "", ""
+        if lst1[i] == "/":
+            a = lst1[i-1] / lst1[i+1]
+            lst[i] = a
+            lst[i - 1], lst[i + 1] = "", ""
+    for i in lst:
+        if i == "":
+            lst.remove(i)
+
 
 def Calculator(lst, a, i):
     if i == 0:
@@ -61,7 +76,7 @@ def Calculator(lst, a, i):
 
 def GetResult():
     CalcAdd()
-    print(calc)
+    PvS(calc)
     ent.delete(0, "end")
     for i in range(len(calc)):
         if i + 2 <= len(calc) - 1:
