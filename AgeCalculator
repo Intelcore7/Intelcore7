@@ -1,0 +1,26 @@
+from tkinter import *
+from datetime import datetime
+root = Tk()
+
+def Today():
+    global T
+    T = datetime.now()
+
+def GetBD():
+    BD = datetime.strptime(ent.get(), "%Y/%m/%d")
+    delta = T - BD
+    a = int(delta.days)
+    yD = int(a/365)
+    dD = a % 365
+    L2 = Label(root, text= "You are " + str(yD) + " years and " + str(dD) + " days old!")
+    L2.grid(row = 3, column = 1, columnspan = 3)
+
+L1 = Label(root, text= "Your Birthday in format YY/MM/DD =")
+L1.grid( row = 1, column = 1)
+but1 = Button(root, text="Get your age!", command= GetBD)
+but1.grid(row = 2, column = 1, columnspan = 2)
+ent = Entry(root, width= 30)
+ent.grid(row =1, column = 2, columnspan = 2)
+
+Today()
+root.mainloop()
